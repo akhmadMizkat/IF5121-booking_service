@@ -74,11 +74,11 @@ def pay(booking_number):
     booking.set_status("paid")
     return Response(status=204)
 
-@app.route("/user-booking/<email>", methods=["POST"])
+@app.route("/user-booking/<email>", methods=["GET"])
 def get_user_booking(email):
     bookings = []
     for b in booking_db.data_booking:
-        if b.get_user().get_email() == email:
+        if b.get_user().email == email:
             bookings.append(b)    
 
     return jsonify(serialize(bookings))
